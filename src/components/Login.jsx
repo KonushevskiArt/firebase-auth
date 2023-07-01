@@ -1,12 +1,28 @@
 import { Form } from "./form";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/slices/userSlice';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const handleLogin = () => {}
+  const dispatch = useDispatch();
+
+  const handleLogin = (email, password) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential);
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+
+  }
 
   return (
-    <div>
-      
-    </div>
+    <Form 
+      title={'Sign in'}
+      handleClick={handleLogin}
+    />
   );
 };
 
