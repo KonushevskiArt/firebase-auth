@@ -1,15 +1,31 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../store/slices/userSlice';
+import { useAuth } from './../hooks/useAuth';
 
 export const HomePage = () => {
+  const dispatch = useDispatch();
+  const { isAuth, email } = useAuth();
+
   const navigate = useNavigate();
+
   useEffect(() => {
-    navigate("/login");
+    if(!isAuth) {
+      navigate("/login");
+    }
   }, [])
 
   return (
     <>
       <h1>Home page</h1>
+
+
+      <button
+        onClick={() => dispatch(removeUser())}
+      >
+        Log out from {email}
+      </button>
     </>
   )
 };
