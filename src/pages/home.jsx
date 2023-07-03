@@ -14,7 +14,7 @@ export const HomePage = () => {
     if(!isAuth) {
       navigate("/login");
     }
-  }, [])
+  }, [isAuth])
 
   return (
     <>

@@ -13,13 +13,18 @@ const SignUp = () => {
   const handleRegister = (email, password) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-    .then((user) => {
-      console.log(user);
+    .then(({ user }) => {
+      // console.log({
+      //   email: user.email,
+      //   id: user.id,
+      //   token: user.accessToken,
+      // });
       dispatch(setUser({
         email: user.email,
         id: user.id,
         token: user.accessToken,
-      }))
+      }));
+
       navigate('/');
     })
     .catch((error) => {

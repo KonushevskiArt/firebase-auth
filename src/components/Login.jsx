@@ -12,13 +12,14 @@ const Login = () => {
   const handleLogin = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-    .then((user) => {
-      console.log(user);
+    .then(({ user }) => {
+
       dispatch(setUser({
         email: user.email,
         id: user.id,
         token: user.accessToken,
-      }))
+      }));
+
       navigate('/')
     })
     .catch((error) => {
